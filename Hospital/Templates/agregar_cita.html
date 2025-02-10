@@ -1,0 +1,84 @@
+{% extends 'index.html' %}
+
+{% block body %}
+<main>
+    <div class="wrapper">
+        <h1>Registro de citas</h1>
+        <form id="registrationForm" method="post">
+            <div class="input-box custom-select">
+                <label for="fecha" class="form-label">Fecha</label>
+                <input type="date" id="fecha" name="fecha" class="form-control" onchange="fetchDoctoresYHorarios()" required>
+            </div>
+
+            <div class="input-box custom-select">
+                <label for="doctor" class="form-label">Seleccionar Doctor</label>
+                <select id="doctor" name="doctor" class="form-select" onchange="fetchHorarios()" required>
+                    <option value="">Seleccione un doctor</option>
+                    {% for doctor in doctores %}
+                        <option value="{{ doctor.doctor_id }}">
+                            {{ doctor.nombre_completo }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="input-box custom-select">
+                <label for="horario" class="form-label">Seleccionar Horario</label>
+                <select id="horario" name="horario" class="form-select" required>
+                    <option value="">Seleccione un horario</option>
+                </select>
+            </div>
+            
+            <div class="input-box custom-button">
+                <button type="submit" class="btn">Agendar Cita</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<script>
+    function fetchDoctoresYHorarios() {
+        const fecha = document.getElementById('fecha').value;
+        if (fecha) {
+            fetch(`/doctores_por_fecha?fecha=${fecha}`)
+                .then(response => response.json())
+                .then(data => {
+                    const doctoresSelect = document.getElementById('doctor');
+                    doctoresSelect.innerHTML = '<option value="">Seleccione un doctor</option>';
+
+                    data.doctores.forEach(doctor => {
+                        const option = document.createElement('option');
+                        option.value = doctor.doctor_id;
+                        option.textContent = `${doctor.nombre_completo}`;
+                        doctoresSelect.appendChild(option);
+                    });
+
+                    document.getElementById('horario').innerHTML = '<option value="">Seleccione un horario</option>';
+                });
+        }
+    }
+
+    function fetchHorarios() {
+        const fecha = document.getElementById('fecha').value;
+        const doctorId = document.getElementById('doctor').value;
+
+        if (fecha && doctorId) {
+            fetch(`/horarios_por_doctor_y_fecha?fecha=${fecha}&doctor_id=${doctorId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const horariosSelect = document.getElementById('horario');
+                    horariosSelect.innerHTML = '<option value="">Seleccione un horario</option>';
+
+                    data.horarios.forEach(horario => {
+                        const option = document.createElement('option');
+                        option.value = horario.horario_id;
+                        option.textContent = `${horario.hora_inicio} - ${horario.hora_fin}`;
+                        horariosSelect.appendChild(option);
+                    });
+                });
+        } else {
+            document.getElementById('horario').innerHTML = '<option value="">Seleccione un horario</option>';
+        }
+    }
+</script>
+{% endblock %}

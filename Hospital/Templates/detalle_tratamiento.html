@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+
+{% block body %}
+<main>
+    <div class="wrapper">
+        <h1>Registro de Tratamiento</h1>
+        <form id="registrationForm" action="/insertar_detalle_tratamiento" method="POST" enctype="multipart/form-data">
+            <div class="input-box custom-select">
+                <label for="ID_Tratamiento" class="form-label">Seleccionar Tratamiento</label>
+                <select name="ID_Tratamiento" id="ID_Tratamiento" class="form-select" required>
+                    {% for tratamiento in tratamientos %}
+                        <option value="{{ tratamiento[0] }}">{{ tratamiento[1] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="input-box">
+                <input type="text" name="Notas" id="Notas" placeholder="Notas" class="form-control" required title="Ingrese solo letras y espacios">
+            </div>
+            <div class="input-box custom-button">
+                <button type="submit" class="btn">Registrar Tratamiento</button>
+            </div>
+        </form>
+    </div>
+</main>
+{% endblock %}

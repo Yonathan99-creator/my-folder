@@ -1,0 +1,24 @@
+{% extends 'index.html' %}
+
+{% block body %}
+<main>
+    <div class="wrapper">
+        <h1>Registro del Tratamiento</h1>
+        <form id="registrationForm" action="/agregar_tratamiento" method="POST" enctype="multipart/form-data">
+            <div class="input-box">
+                <input type="text" name="Nombre_Tratamiento" id="Nombre_Tratamiento" placeholder="Nombre del Tratamiento" class="form-control" required pattern="[A-Za-z\s]+" title="Ingrese solo letras y espacios">
+            </div>
+            <div class="input-box">
+                <input type="text" name="Descripcion" id="Descripcion" placeholder="Descripcion" class="form-control" required pattern="[A-Za-z\s]+" title="Ingrese solo letras y espacios">
+            </div>
+            <div class="input-box">
+                <input type="number" name="Precio" id="Precio" placeholder="Precio" class="form-control" required min="1"  required pattern="[0-9]" title="Ingrese la cantidad correcta">
+            </div>
+            <div class="input-box custom-button">
+                <button type="submit" class="btn">Agregar Tratamiento</button>
+            </div>
+        </form>
+    </div>
+</main>
+{% endblock %}
+

@@ -1,0 +1,23 @@
+{% extends 'index.html' %}
+
+{% block body %}
+<main>
+    <div class="wrapper">
+        <h1>Registro de Medicamentos</h1>
+        <form id="registrationForm" action="/agregar_medicamento" method="POST" enctype="multipart/form-data">
+            <div class="input-box">
+                <input type="text" name="nombre_medicamento" id="nombre_medicamento" placeholder="Nombre del Medicamento" class="form-control" required pattern="[A-Za-z\s]+" title="Ingrese solo letras y espacios">
+            </div>
+            <div class="input-box">
+                <input type="text" name="descripcion" id="descripcion" placeholder="Descripcion" class="form-control" required title="Ingrese algun valor">
+            </div>
+            <div class="input-box">
+                <input type="number" name="precio" id="precio" placeholder="Precio del Medicamento" class="form-control" required min="1"  required pattern="[0-9]" title="Ingrese la cantidad correcta">
+            </div>
+            <div class="input-box custom-button">
+                <button type="submit" class="btn">Registrar Medicamento</button>
+            </div>
+        </form>
+    </div>
+</main>
+{% endblock %}

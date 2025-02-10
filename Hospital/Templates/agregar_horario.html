@@ -1,0 +1,55 @@
+{% extends 'index.html' %}
+
+{% block body %}
+<main>
+    <div class="wrapper">
+        <h1>Registro de horarios</h1>
+        <form id="registrationForm" action="/agregar_horario" method="POST" enctype="multipart/form-data">
+            <div class="input-box">
+                <label for="fecha" class="form-label">Fecha</label>
+                <input type="date" name="fecha" id="fecha" placeholder="Fecha" class="form-control" required>
+            </div>
+            <div class="input-box custom-select">
+                <label for="horario_doctor" class="form-label">Selecciona un horario</label>
+                <select class="form-select" id="horario" name="horario" required>
+                    <!-- Horarios generados desde las 09:00 hasta las 24:00 -->
+                    <option value="09:00-09:30">09:00 - 09:30</option>
+                    <option value="09:30-10:00">09:30 - 10:00</option>
+                    <option value="10:00-10:30">10:00 - 10:30</option>
+                    <option value="10:30-11:00">10:30 - 11:00</option>
+                    <option value="11:00-11:30">11:00 - 11:30</option>
+                    <option value="11:30-12:00">11:30 - 12:00</option>
+                    <option value="12:00-12:30">12:00 - 12:30</option>
+                    <option value="12:30-13:00">12:30 - 13:00</option>
+                    <option value="12:30-13:00">13:00 - 13:30</option>
+                    <option value="12:30-13:00">13:30 - 14:00</option>
+                    <option value="12:30-13:00">14:00 - 14:30</option>
+                    <option value="12:30-13:00">14:30 - 15:00</option>
+                    <option value="12:30-13:00">15:00 - 15:30</option>
+                    <option value="12:30-13:00">15:30 - 16:00</option>
+                    <option value="12:30-13:00">16:00 - 16:30</option>
+                    <option value="12:30-13:00">16:30 - 17:00</option>
+                    <option value="12:30-13:00">17:00 - 17:30</option>
+                    <option value="12:30-13:00">17:30 - 18:00</option>
+                    <option value="12:30-13:00">18:00 - 18:30</option>
+                    <option value="12:30-13:00">18:30 - 19:00</option>
+                    <option value="12:30-13:00">19:00 - 19:30</option>
+                    <option value="12:30-13:00">19:30 - 20:00</option>
+                    <option value="12:30-13:00">20:00 - 20:30</option>
+                    <option value="12:30-13:00">20:30 - 21:00</option>
+                    <option value="12:30-13:00">21:00 - 21:30</option>
+                    <option value="12:30-13:00">21:30 - 22:00</option>
+                    <option value="12:30-13:00">22:00 - 22:30</option>
+                    <option value="12:30-13:00">22:30 - 23:00</option>
+                    <option value="12:30-13:00">23:00 - 23:30</option>
+                    <option value="12:30-13:00">23:30 - 24:00</option>
+                    <!-- Añade más opciones hasta completar 24 horas -->
+                </select>
+            </div>
+            <div class="input-box custom-button">
+                <button type="submit" class="btn">Guardar Horario</button>
+            </div>
+        </form>
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+
+{% block body %}
+<main>
+    <div class="wrapper">
+        <h1>Registro de Medicamentos</h1>
+        <form id="registrationForm" action="/insertar_receta" method="POST" enctype="multipart/form-data">
+            <div class="input-box custom-select">
+                <label for="ID_Medicamento" class="form-label">Seleccionar Medicamento</label>
+                <select name="ID_Medicamento" id="ID_Medicamento" class="form-select" required>
+                    {% for medicamento in medicamentos %}
+                        <option value="{{ medicamento[0] }}">{{ medicamento[1]}} - {{ medicamento[2]}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="input-box">
+                <input type="text" name="Dosis" id="Dosis" placeholder="Dosis" class="form-control" required title="Ingrese solo letras y espacios">
+            </div>
+            <div class="input-box">
+                <input type="text" name="Duracion" id="Duracion" placeholder="Duracion" class="form-control" required title="Ingrese solo letras y espacios">
+            </div>
+            <div class="input-box custom-button">
+                <button type="submit" class="btn">Registrar Medicamento</button>
+            </div>
+        </form>
+        <form id="registrationForm" action="/procesar_pago" method="POST" enctype="multipart/form-data">
+            <div class="input-box custom-button">
+                <button type="submit" class="btn">Terminar cita</button>
+            </div>
+        </form>
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'index.html' %}
+
+{% block body %}
+<main>
+	<div class="container p-3 my-5 bg-light border border-primary">
+		<div class="mb-3">
+            <label for="filterDate" class="form-label">Filtrar por fecha:</label>
+            <input type="date" id="filterDate" class="form-control">
+        </div>
+
+		<table id="example" class="table table-striped nowrap" style="width:100%">
+			<thead>
+				<tr>
+                    <th>#</th>
+					<th data-column="Paciente"> Paciente </th>
+					<th data-column="Fecha"> Fecha </th>
+					<th data-column="Hora"> Hora </th>
+					<th> Operaciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for cita in citas %}
+					{% if cita[4] == 3 %}
+						<tr>
+							<td>{{ loop.index }}</td>
+							<td data-column="Paciente">{{ cita[1] }}</td>
+							<td data-column="Fecha">{{ cita[2] }}</td>
+							<td data-column="Hora">{{ cita[3] }}</td>
+							<td>
+								<div class="btn-group" role="group">
+									<a href="/actualizar_cita/{{ cita[0] }}" class="btn-edit">Comenzar cita</a>
+								</div>
+							</td>
+						</tr>
+					{% endif %}
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+<script>
+    // Filtrado por fecha
+    document.getElementById('filterDate').addEventListener('input', function () {
+        const selectedDate = this.value;
+        const tableRows = document.querySelectorAll('#example tbody tr');
+
+        tableRows.forEach(row => {
+            const rowDate = row.querySelector('td[data-column="Fecha"]').textContent.trim();
+
+            if (selectedDate === "" || rowDate === selectedDate) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none"; 
+            }
+        });
+    });
+</script>
+{% endblock %}

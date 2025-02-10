@@ -1,0 +1,36 @@
+{% extends 'index.html' %}
+
+{% block body %}
+<main>
+    <div class="wrapper">
+        <h1>Editar Doctor</h1>
+        <form id="registrationForm" action="/actualizar_doctor/{{ doctor[0] }}" method="POST" enctype="multipart/form-data">
+            <div class="input-box">
+                <input type="text" name="Nom_Persona" id="Nom_Persona" placeholder="Nombre del Doctor" class="form-control" required pattern="[A-Za-z\s]+" title="Ingrese solo letras y espacios" value="{{ doctor[1] }}">
+            </div>
+            <div class="input-box">
+                <input type="text" name="ApellidoP" id="ApellidoP" placeholder="Apellido Paterno" class="form-control" required pattern="[A-Za-z\s]+" title="Ingrese solo letras y espacios" value="{{ doctor[2] }}">
+            </div>
+            <div class="input-box">
+                <input type="text" name="ApellidoM" id="ApellidoM" placeholder="Apellido Materno" class="form-control" required pattern="[A-Za-z\s]+" title="Ingrese solo letras y espacios" value="{{ doctor[3] }}">
+            </div>
+            <div class="input-box">
+                <input type="email" name="Email" id="Email" placeholder="Correo Electrónico" class="form-control" required title="Ingrese un correo válido" value="{{ doctor[4] }}">
+            </div>
+            <div class="input-box">
+                <input type="password" name="Contraseña" id="Contraseña" placeholder="Contraseña" class="form-control" required title="Ingrese una contraseña" value="{{ doctor[7] }}">
+            </div>
+            <div class="input-box">
+                <input type="date" name="Fecha_Nacimiento" id="Fecha_Nacimiento" placeholder="Fecha de Nacimiento" class="form-control" required title="Ingrese una fecha de nacimiento válida" value="{{ doctor[5] }}">
+            </div>
+            <div class="input-box">
+                <input type="text" name="Especialidad" id="Especialidad" placeholder="Especialidad" class="form-control" required pattern="[A-Za-z\s]+" title="Ingrese solo letras y espacios" value="{{ doctor[6] }}">
+            </div>
+            <div class="input-box custom-button">
+                <button type="submit" class="btn">Actualizar Doctor</button>
+            </div>
+        </form>
+    </div>
+</main>
+{% endblock %}
+

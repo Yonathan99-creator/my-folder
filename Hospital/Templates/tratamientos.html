@@ -1,0 +1,42 @@
+{% extends 'index.html' %}
+
+{% block body %}
+<main>
+	<div class="container p-3 my-5 bg-light border border-primary">
+		<a href="/agregar_tratamiento" class="btn-add">
+			<span>Agregar nuevo tratamiento</span>
+		</a>
+		<!-- DataTable Code starts -->
+		<table id="example" class="table table-striped nowrap" style="width:100%">
+			<thead>
+				<tr>
+                    <th>#</th>
+					<th data-column="Nombre_Tratamiento"> Nombre Tratamiento </th>
+					<th data-column="Descripcion"> Descripcion </th>
+                    <th data-column="Precio"> Precio </th>
+                    <th data-column="Estado"> Estado </th>
+                    <th> Operaciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for tratamiento in tratamientos %}
+					<tr>
+                        <td>{{ loop.index }}</td>
+						<td data-column="Nombre_Tratamiento">{{ tratamiento[1] }}</td>
+						<td data-column="Descripcion">{{ tratamiento[2] }}</td>
+                        <td data-column="Precio">{{ tratamiento[3] }}</td>
+                        <td data-column="Estado">{{ tratamiento[4] }}</td>
+                        <td>
+							<div class="btn-group" role="group">
+								<a href="/editar_tratamiento/{{ tratamiento[0] }}" class="btn-edit">Editar</a>
+								<a href="/inactivar_tratamiento/{{ tratamiento[0] }}" class="btn-delete">Dar de baja</a>
+                                <a href="/activar_tratamiento/{{ tratamiento[0] }}" class="btn-edit">Dar de alta</a>
+							</div>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</main>
+{% endblock %}

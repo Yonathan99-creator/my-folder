@@ -1,0 +1,71 @@
+{% extends 'index.html' %}
+
+{% block body %}
+<main>
+	<div class="container p-3 my-5 bg-light border border-primary">
+		<div class="mb-3">
+            <label for="filterDate" class="form-label">Filtrar por fecha:</label>
+            <input type="date" id="filterDate" class="form-control">
+        </div>
+
+		<div class="text-end mb-3">
+            <button class="btn btn-secondary" onclick="generatePDF()">Descargar PDF</button>
+        </div>
+
+		<table id="example" class="table table-striped nowrap" style="width:100%">
+			<thead>
+				<tr>
+                    <th>#</th>
+					<th data-column="Nombre"> Nombre del Paciente </th>
+					<th data-column="Monto"> Monto </th>
+					<th data-column="Fecha_Pago"> Fecha_Pago </th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for pago in pagos %}
+					<tr>
+                        <td>{{ loop.index }}</td>
+						<td data-column="Nombre">{{ pago[1] }}</td>
+						<td data-column="Monto">{{ pago[2] }}</td>
+						<td data-column="Fecha_Pago">{{ pago[3] }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</main>
+<script>
+    // Filtrado por fecha
+    document.getElementById('filterDate').addEventListener('input', function () {
+        const selectedDate = this.value;
+        const tableRows = document.querySelectorAll('#example tbody tr');
+
+        tableRows.forEach(row => {
+            const rowDate = row.querySelector('td[data-column="Fecha_Pago"]').textContent.trim();
+
+            if (selectedDate === "" || rowDate === selectedDate) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none"; 
+            }
+        });
+    });
+
+    // Función para generar y descargar el PDF
+    function generatePDF() {
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF();
+
+        pdf.text("Pagos del hospital", 10, 10);
+
+        pdf.autoTable({
+            html: '#example',
+            startY: 20,
+            theme: 'striped',
+            styles: { fontSize: 10 },
+        });
+
+        pdf.save('pagos.pdf');
+    }
+</script>
+{% endblock %}

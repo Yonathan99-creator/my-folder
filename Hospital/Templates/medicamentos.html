@@ -1,0 +1,65 @@
+{% extends 'index.html' %}
+
+{% block body %}
+<main>
+	<div class="container p-3 my-5 bg-light border border-primary">
+		<div class="text-end mb-3">
+            <button class="btn btn-secondary" onclick="generatePDF()">Descargar PDF</button>
+        </div>
+
+		<a href="/agregar_medicamento" class="btn-add">
+			<span>Agregar nuevo medicamento</span>
+		</a>
+		<table id="example" class="table table-striped nowrap" style="width:100%">
+			<thead>
+				<tr>
+                    <th>#</th>
+					<th data-column="Nombre"> Nombre Medicamento </th>
+					<th data-column="Descripcion"> Descripcion </th>
+					<th data-column="Precio"> Precio </th>
+                    <th data-column="Estado"> Estado </th>
+					<th> Operaciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for medicamento in medicamentos %}
+					<tr>
+                        <td>{{ loop.index }}</td>
+						<td data-column="nombre">{{ medicamento[1] }}</td>
+						<td data-column="Descripcion">{{ medicamento[2] }}</td>
+						<td data-column="Precio">{{ medicamento[3] }}</td>
+                        <td data-column="Estado">{{ medicamento[4] }}</td>
+						<td>
+							<div class="btn-group" role="group">
+								<a href="/editar_medicamento/{{ medicamento[0] }}" class="btn-edit">Editar</a>
+								<a href="/inactivar_medicamento/{{ medicamento[0] }}" class="btn-delete">Dar de baja</a>
+                                <a href="/activar_medicamento/{{ medicamento[0] }}" class="btn-edit">Dar de alta</a>
+							</div>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+<script>
+    // Función para generar y descargar el PDF
+    function generatePDF() {
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF();
+
+        pdf.text("Registro de medicamentos", 10, 10);
+
+        pdf.autoTable({
+            html: '#example',
+            startY: 20,
+            theme: 'striped',
+            styles: { fontSize: 10 },
+        });
+
+        pdf.save('registro_medicamento.pdf');
+    }
+</script>
+{% endblock %}

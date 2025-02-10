@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- DataTable CSS  -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0-alpha3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.bootstrap5.min.css">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+	<title>Hospital</title>
+    
+</head>
+<body>
+
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="/Principal" class="brand">
+			<i class='bx bx-plus-medical'></i>
+			<span class="text">Hospital</span>
+		</a>
+		<ul class="side-menu top">
+			{% if 'user_type' in session and session['user_type'] == 1 %}
+			<li class="active">
+				<a href="/">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Inicio</span>
+				</a>
+			</li>
+			<li>
+				<a href="/medicamentos">
+					<i class='bx bxs-first-aid' ></i>
+					<span class="text">Medicamentos</span>
+				</a>
+			</li>
+			<li>
+				<a href="/pagos">
+					<i class='bx bxs-receipt' ></i>
+					<span class="text">Pagos</span>
+				</a>
+			</li>
+			<li>
+				<a href="/pacientes_registros">
+					<i class='bx bxs-folder' ></i>
+					<span class="text">Registros de pacientes</span>
+				</a>
+			</li>
+			<li>
+				<a href="/doctores">
+					<i class='bx bxs-user' ></i>
+					<span class="text">Doctores</span>
+				</a>
+			</li>
+			<li>
+				<a href="/tratamientos">
+					<i class='bx bxs-heart' ></i>
+					<span class="text">Tratamientos</span>
+				</a>
+			</li>
+            {% elif 'user_type' in session and session['user_type'] == 2 %}
+			<li class="active">
+				<a href="#">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Inicio</span>
+				</a>
+			</li>
+            <li>
+				<a href="/mis_horarios">
+					<i class='bx bxs-time' ></i>
+					<span class="text">Horarios</span>
+				</a>
+			</li>
+			<li>
+				<a href="/mis_citas_doctor">
+					<i class='bx bxs-user-check' ></i>
+					<span class="text">Citas</span>
+				</a>
+			</li>
+			<li>
+				<a href="/pacientes">
+					<i class='bx bxs-group' ></i>
+					<span class="text">Pacientes</span>
+				</a>
+			</li>
+			<li>
+				<a href="/medicamentos">
+					<i class='bx bxs-first-aid' ></i>
+					<span class="text">Medicamentos</span>
+				</a>
+			</li>
+			{% elif 'user_type' in session and session['user_type'] == 3 %}
+			<li class="active">
+				<a href="#">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Inicio</span>
+				</a>
+			</li>
+			<li>
+				<a href="/mis_citas">
+					<i class='bx bxs-calendar-plus' ></i>
+					<span class="text">Mis citas</span>
+				</a>
+			</li>
+			<li>
+				<a href="/mis_recetas">
+					<i class='bx bxs-capsule' ></i>
+					<span class="text">Mis recetas</span>
+				</a>
+			</li>
+            {% endif %}
+		</ul>
+		<ul class="side-menu">
+			{% if 'user_type' in session and session['user_type'] == 1 %}
+			<li>
+				<a href="/inteligencia_artificial">
+					<i class='bx bxs-message-alt-dots' ></i>
+					<span class="text">Asistente Virtual</span>
+				</a>
+			</li>
+			{% endif %}
+			<li>
+				<a href="/logout" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Cerrar Sesion</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu' ></i>
+			<form action="/search" method="GET">
+				<div class="form-input">
+					<input type="search" name="query" placeholder="Buscar..." required>
+					<button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+				</div>
+			</form>
+			<div class="info-usuario">
+                <div class="nombre-email">
+                    {% if 'user_name' in session %}
+                        <a class="email barra-lateral-email">{{ session['user_name'] }}</a>
+                    {% endif %}
+                </div>
+            </div>
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+		{% block body %}
+    	{% endblock %}
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+	
+
+	<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    <!-- DataTable JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.1/js/responsive.bootstrap5.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/script2.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{% extends 'index.html' %}
+
+{% block body %}
+<main>
+    <div class="wrapper">
+        <h1>Registro de Doctores</h1>
+        <form id="registrationForm" action="/agregar_doctor" method="POST" enctype="multipart/form-data">
+            <div class="input-box">
+                <input type="text" name="Nom_Persona" id="Nom_Persona" placeholder="Nombre del Doctor" class="form-control" required pattern="[A-Za-z\s]+" title="Ingrese solo letras y espacios">
+            </div>
+            <div class="input-box">
+                <input type="text" name="ApellidoP" id="ApellidoP" placeholder="Apellido Paterno" class="form-control" required pattern="[A-Za-z\s]+" title="Ingrese solo letras y espacios">
+            </div>
+            <div class="input-box">
+                <input type="text" name="ApellidoM" id="ApellidoM" placeholder="Apellido Materno" class="form-control" required pattern="[A-Za-z\s]+" title="Ingrese solo letras y espacios">
+            </div>
+            <div class="input-box">
+                <input type="email" name="Email" id="Email" placeholder="Correo Electrónico" class="form-control" required title="Ingrese un correo válido">
+            </div>
+            <div class="input-box">
+                <input type="password" name="Contraseña" id="Contraseña" placeholder="Contraseña" class="form-control" required title="Ingrese una contraseña">
+            </div>
+            <div class="input-box">
+                <input type="date" name="Fecha_Nacimiento" id="Fecha_Nacimiento" placeholder="Fecha de Nacimiento" class="form-control" required title="Ingrese una fecha de nacimiento válida">
+            </div>
+            <div class="input-box">
+                <input type="text" name="Especialidad" id="Especialidad" placeholder="Especialidad" class="form-control" required pattern="[A-Za-z\s]+" title="Ingrese solo letras y espacios">
+            </div>
+            <div class="input-box custom-button">
+                <button type="submit" class="btn">Registrar Doctor</button>
+            </div>
+        </form>
+    </div>
+</main>
+{% endblock %}

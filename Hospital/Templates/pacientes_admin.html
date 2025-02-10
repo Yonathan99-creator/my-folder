@@ -1,0 +1,40 @@
+{% extends 'index.html' %}
+
+{% block body %}
+<main>
+	<div class="container p-3 my-5 bg-light border border-primary">
+		<table id="example" class="table table-striped nowrap" style="width:100%">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th data-column="Paciente"> Paciente </th>
+					<th data-column="Fecha"> Fecha </th>
+                    <th data-column="Doctor"> Doctor </th>
+                    <th>Ver Tratamientos</th>
+                    <th>Ver Recetas</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for paciente in pacientes %}
+					<tr>
+						<td>{{ loop.index }}</td>
+						<td data-column="Paciente">{{ paciente[1] }}</td>
+						<td data-column="Fecha">{{ paciente[2] }}</td>
+                        <td data-column="Doctor">{{ paciente[3] }}</td>
+                        <td>
+							<div class="btn-group" role="group">
+								<a href="{{ url_for('mostrar_tratamientos_paciente_registro', paciente_id=paciente[0]) }}" class="btn-edit"> Ver Tratamientos</a>
+							</div>
+                        </td>
+                        <td>
+							<div class="btn-group" role="group">
+								<a href="{{ url_for('mostrar_recetas_paciente_registro', paciente_id=paciente[0]) }}" class="btn-edit"> Ver Recetas </a>
+							</div>
+                        </td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</main>
+{% endblock %}
