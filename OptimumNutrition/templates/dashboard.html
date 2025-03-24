@@ -1,0 +1,48 @@
+{% extends 'principal.html' %}
+
+{% block body %}
+
+<!-- Carrusel de imágenes -->
+<div class="carousel-container">
+    <div class="carousel-slide">
+        <img src="/static/images/img1.jpg" alt="Imagen 1">
+        <img src="/static/images/img2.jpg" alt="Imagen 2">
+        <img src="/static/images/img3.jpg" alt="Imagen 3">
+    </div>
+
+    <div class="carousel-text">
+        <h2 id="carousel-title">WHEY PROTEIN</h2>
+        <p id="carousel-description">Completa tu requerimiento proteico de la forma mas deliciosa.</p>
+        <button onclick="location.href='/proteina'" class="buy-btn">Comprar</button>
+    </div>
+
+    <div class="controls">
+        <button class="control-btn pause">&#9208;</button>
+        <button class="control-btn prev">&#10094;</button>
+        <button class="control-btn next">&#10095;</button>
+    </div>
+</div>
+
+<!-- Nuestra linea -->
+<section class="flex flex-col md:flex-row items-center bg-gray-900 text-white py-16 px-6 md:px-16">
+    <!-- Imagen de productos -->
+    <div class="md:w-1/2 flex justify-center">
+        <img src="static/images/products.jpeg" alt="Nuestros productos" class="max-w-full h-auto">
+    </div>
+
+    <!-- Texto de producto -->
+    <div class="md:w-1/2 text-center md:text-left mt-8 md:mt-0">
+        <h2 class="text-4xl font-bold text-primary">NUESTRA LÍNEA</h2>
+        <p class="text-lg font-semibold mt-4 text-gray-300">
+            Ingredientes de alta calidad. Fórmulas respaldadas por la ciencia. Sabores de otro nivel.
+        </p>
+        <p class="text-gray-400 mt-2">
+            Lo que le das a tu cuerpo es lo que obtienes. Descubre lo mejor para ti.
+        </p>
+        <button onclick="location.href='/amino'" class="mt-6 bg-primary text-white font-bold py-3 px-6 rounded-lg hover:bg-yellow-500 transition">
+            VER TODOS LOS PRODUCTOS
+        </button>
+    </div>
+</section>
+
+{% endblock %}

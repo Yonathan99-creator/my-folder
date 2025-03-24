@@ -1,0 +1,78 @@
+{% extends 'principal.html' %}
+
+{% block body %}
+
+<!-- Sección de Producto Destacado -->
+<section class="flex flex-col md:flex-row items-center bg-gray-800 text-white py-16 px-6 md:px-16">
+    <!-- Texto del producto -->
+    <div class="md:w-1/2 text-center md:text-left">
+        <h2 class="text-4xl font-bold">SERIOUS MASS®</h2>
+        <p class="text-lg mt-4">Para Objetivos De Desarrollo Muscular Y De Aumento De Peso.</p>
+        <button onclick="location.href='#sabores'" class="mt-6 bg-red-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-red-700 transition"> VER SABORES </button>
+    </div>
+    
+    <!-- Imagen del producto -->
+    <div class="md:w-1/2 mt-8 md:mt-0 flex justify-center">
+        <img src="/static/images/ganador.png" alt="MASS" class="max-w-full h-auto">
+    </div>
+</section>
+
+<!-- Seccion de descripción y detalles nutricionales -->
+<section class="bg-black text-white py-10 px-6 md:px-16">
+    <div class="flex flex-col md:flex-row items-start">
+        <!-- Descripción -->
+        <div class="md:w-2/3">
+            <h3 class="text-lg font-bold mb-2">SERIOUS MASS</h3>
+            <p class="text-gray-300 mb-4">
+                Diseñamos nuestros batidos de aumento de peso llenos de proteínas para ayudarte a subir de peso y a apoyar tus metas de aumento de peso.
+            </p>
+        </div>
+
+        <!-- Detalles Nutricionales -->
+        <div class="md:w-1/3 flex flex-col items-center md:items-end">
+            <div class="bg-red-600 text-white text-center p-4 mb-4">
+                <p class="text-xl font-bold mb-1">PROTEÍNA</p>
+                <p class="text-4xl font-bold">50g</p>
+            </div>
+            <div class="flex justify-around w-full">
+                <div class="text-center mx-2">
+                    <p class="text-gray-500">CALORÍAS</p>
+                    <p class="text-xl font-bold">≤1250</p>
+                </div>
+                <div class="text-center mx-2">
+                    <p class="text-gray-500">CARBOHIDRATOS</p>
+                    <p class="text-xl font-bold">≤254g</p>
+                </div>
+                <div class="text-center mx-2">
+                    <p class="text-gray-500">BCAAS</p>
+                    <p class="text-xl font-bold">10.7g</p>
+                </div>
+                <div class="text-center mx-2">
+                    <p class="text-gray-500">LEUCINA</p>
+                    <p class="text-xl font-bold">5.1g</p>
+                </div>
+            </div>
+            <p class="text-gray-500 text-sm mt-2">CANTIDADES POR PORCIÓN</p>
+        </div>
+    </div>
+</section>
+
+<!-- Seccion de sabores Ganador -->
+<section id="sabores" class="bg-black text-white py-16 px-6 md:px-16">
+    <h2 class="text-center text-3xl font-bold mb-8">SABORES SERIOUS MASS</h2>
+    <div class="flex flex-wrap justify-center gap-8">
+        {% for producto in productos %}
+        <div class="text-center max-w-xs">
+            <img src="/static/images/mass_chocolate.png" alt="MASS chocolate" class="w-full h-auto mb-4" style="width: 300; height: 300;">
+            <h3 class="text-xl font-bold">{{ producto.nombre }}</h3>
+            <p class="text-sm text-gray-400">{{ producto.marca }}</p>
+            <p class="text-sm text-gray-400">{{ producto.contenido }}</p>
+            <p class="text-sm text-gray-400">Ingredientes: {{ producto.ingredientes }}</p>
+            <p class="text-lg font-bold text-green-400">${{ producto.precio }}</p>
+            <button onclick="location.href='/producto/{{ producto.id }}'" class="bg-red-600 text-white font-bold py-2 px-4 rounded hover:bg-red-700 transition">CÓMPRALO AHORA</button>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

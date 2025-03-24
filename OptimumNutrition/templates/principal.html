@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimum Nutrition | Mexico</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo_pestaña.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='carrusel.css') }}">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white">
+        <!-- Navbar -->
+        <nav class="bg-black text-white p-4 flex items-center justify-between">
+
+            <!-- Logo -->
+            <div class="flex items-center space-x-4">
+                <a href="/"><img src="/static/images/logo.png" alt="Logo" class="h-6"></a>
+            </div>
+        
+            <!-- Menú -->
+            <div class="hidden md:flex space-x-6">
+
+                <!-- Menú desplegable -->
+                <div class="relative group">
+                    <button type="button" class="flex items-center gap-x-2 text-white font-semibold hover:text-gray-400" id="menu-button">
+                        Productos
+                        <svg class="size-5 text-gray-400 transition-transform transform group-hover:rotate-180" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+
+                    <!-- Submenu -->
+                    <div class="absolute left-0 mt-2 w-56 bg-gray-900 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                        <a href="/proteina" class="block px-4 py-2 text-white hover:bg-gray-700 rounded-md">Proteína</a>
+                        <a href="/ganador" class="block px-4 py-2 text-white hover:bg-gray-700 rounded-md">Ganadores de peso</a>
+                        <a href="/amino" class="block px-4 py-2 text-white hover:bg-gray-700 rounded-md">Aminoácidos</a>
+                        <a href="/creatina" class="block px-4 py-2 text-white hover:bg-gray-700 rounded-md">Creatina</a>
+                    </div>
+                </div>
+                <a href="#" class="hover:text-gray-400">Ofertas</a>
+                <a href="/compra" class="hover:text-gray-400">Mis compras</a>
+            </div>
+        
+            <!-- Buscador -->
+            <div class="relative w-1/3 hidden md:block">
+                <input type="text" placeholder="Buscar productos..." class="w-full p-2 bg-gray-800 text-white rounded-full pl-10 focus:outline-none">
+                <span class="absolute left-3 top-2 text-gray-500"><i class="fa-solid fa-magnifying-glass"></i></span>
+            </div>
+        
+            <!-- Íconos y Usuario -->
+            <div class="flex items-center space-x-4">
+                <a href="/carrito" class="hover:text-gray-400"><i class="fa-solid fa-cart-shopping"></i></a>
+                
+                <!-- Menú de Notificaciones -->
+                <div class="relative group">
+                    <button type="button" class="flex items-center gap-x-2 text-white font-semibold hover:text-gray-400" id="notification-button">
+                        <i class="fa-solid fa-bell"></i>
+                        <span id="notification-count" class="bg-red-500 text-white text-xs rounded-full px-2 py-1 ml-1 hidden">0</span>
+                    </button>
+                    
+                    <!-- Dropdown de notificaciones -->
+                    <div id="notification-menu" class="absolute right-0 mt-2 w-64 bg-gray-900 rounded-md shadow-lg opacity-0 invisible transition-all duration-200">
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                                {% for category, message in messages %}
+                                    <div class="notification-item p-4 text-white {{ 'bg-red-500' if category == 'danger' else 'bg-green-500' }} flex justify-between items-center">
+                                        <span>{{ message }}</span>
+                                        <button class="delete-button text-white hover:text-gray-400">
+                                            <i class="fa-solid fa-times"></i>
+                                        </button>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <div class="notification-item p-4 text-white">No tienes nuevas notificaciones</div>
+                            {% endif %}
+                        {% endwith %}
+                        <hr class="border-gray-700">
+                    </div>
+                </div>
+                
+                <!-- Usuario / Login -->
+                <div class="flex items-center space-x-2">
+                    {% if 'nombre' in session %}
+                        <span class="text-gray-300">Hola, {{ session['nombre'] }}</span>
+                        <a href="/logout" class="hover:text-red-500">Cerrar sesión</a>
+                    {% else %}
+                        <a href="/login" class="hover:text-blue-400">Iniciar sesión</a>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+    
+    <!-- Contenido cambiante -->
+    {% block body %}
+    {% endblock %}  
+
+    <!-- Pie de pagina (redes sociales) -->
+    <section class="text-center py-10 bg-black">
+        <h2 class="text-3xl font-bold text-primary">SÍGUENOS</h2>
+        <p class="text-lg font-semibold text-gray-700 dark:text-gray-300 mt-2">COMPARTE TU EXPERIENCIA</p>
+        <p class="text-gray-600 dark:text-gray-400 mt-1">Muéstranos cómo disfrutas nuestros productos y servicios.</p>
+        <p class="text-gray-700 dark:text-gray-300 font-bold mt-2">
+            Usa el hashtag <span class="text-primary">#OPTIMUMNUTRITION</span>
+        </p>
+    
+        <div class="flex justify-center gap-6 mt-6">
+            <a href="#" class="text-blue-500 text-3xl hover:scale-110 transition-transform">
+                <i class="fa-brands fa-facebook"></i>
+            </a>
+            <a href="#" class="text-pink-500 text-3xl hover:scale-110 transition-transform">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="#" class="text-white text-3xl hover:scale-110 transition-transform">
+                <i class="fa-brands fa-x-twitter"></i>
+            </a>
+        </div>        
+    </section>
+
+    <!-- Pie de página -->
+    <footer class="bg-black text-white py-8">
+        <div class="flex justify-around items-center mb-4">
+            <!-- Logos -->
+            <div>
+                <img src="/static/images/logo.png" alt="Optimum Nutrition" class="h-12">
+            </div>
+            <div>
+                <img src="/static/images/logo_glanbia.webp" alt="Glanbia" class="h-12">
+            </div>
+        </div>
+        
+        <!-- Texto -->
+        <div class="text-center text-sm space-y-2">
+            <p>1. Estas declaraciones no han sido evaluadas por la Administración de Alimentos y Medicamentos. Este producto no está destinado a diagnosticar, tratar, curar o prevenir ninguna enfermedad.</p>
+            <p>2. Cuando se usa con el tiempo en combinación con ejercicio de resistencia regular.</p>
+            <p>3. Fuente: Euromonitor International Limited; Edición de Salud del Consumidor 2025, categoría de Nutrición Deportiva, % de participación en el valor minorista, datos de 2024.</p>
+            <p>4. No es un alimento bajo en calorías.</p>
+            <p>5. Aminoácidos de origen natural.</p>
+            <p>6. Consulte la información nutricional para conocer el contenido de grasa saturada, colesterol y sodio.</p>
+        </div>
+        
+        <!-- Derechos de autor -->
+        <div class="text-center mt-4">
+            <p>© 2025 Optimum Nutrition</p>
+        </div>
+    </footer>
+    
+    <script src="static/js/carrusel.js"></script>
+    <script src="static/js/notification.js"></script>
+    {% block scripts %}
+    <script src="{{ url_for('static', filename='js/modal_reseña.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/modal_tarjeta.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/reseñas.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/barra_busqueda_compras.js') }}"></script>
+    {% endblock scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" crossorigin="anonymous"></script>
+</body>
+</html>

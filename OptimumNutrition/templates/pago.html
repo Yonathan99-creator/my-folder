@@ -1,0 +1,89 @@
+{% extends 'principal.html' %}
+
+{% block body %}
+
+<!-- Sección de Pago -->
+<section class="flex flex-col md:flex-row items-start mt-8 bg-gray-900 text-white p-4">
+    <!-- Opciones de Pago -->
+    <div class="flex-1">
+        <h1 class="text-2xl font-bold mb-4">Elige cómo pagar</h1>
+        <div class="space-y-4">
+            {% if tarjetas %}
+                {% for tarjeta in tarjetas %}
+                <div class="p-3 bg-gray-800 rounded-md flex items-center justify-between">
+                    <label class="flex items-center">
+                        <input type="radio" name="metodo-pago" value="{{ tarjeta.id }}" class="form-radio mr-2">
+                        <span class="text-sm">{{ tarjeta.tipo_tarjeta.capitalize() }} **** {{ tarjeta.numero_tarjeta[-4:] }} - {{ tarjeta.titular }}</span>
+                    </label>
+                    <form action="{{ url_for('eliminar_tarjeta', tarjeta_id=tarjeta.id) }}" method="post" style="display:inline;">
+                        <button type="submit" class="text-red-500 ml-4">Eliminar</button>
+                    </form>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-sm text-gray-400">No tienes tarjetas guardadas.</p>
+            {% endif %}
+            
+            <!-- Botón: Nueva tarjeta de débito -->
+            <button onclick="toggleModal('debito')" class="w-full text-left p-3 bg-gray-800 rounded-md flex items-center">
+                <span class="text-sm">Nueva tarjeta de débito</span>
+            </button>
+
+            <!-- Botón: Nueva tarjeta de crédito -->
+            <button onclick="toggleModal('credito')" class="w-full text-left p-3 bg-gray-800 rounded-md flex items-center">
+                <span class="text-sm">Nueva tarjeta de crédito</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Resumen de Compra -->
+    <div class="w-full md:w-1/3 bg-gray-800 p-4 rounded-md ml-0 md:ml-6 mt-6 md:mt-0">
+        <h2 class="text-xl font-bold">Resumen de compra</h2>
+        <div class="mt-2 text-sm">
+            <p class="font-bold text-lg mt-4">Pago Total: ${{ total | round(2) }}</p>
+        </div>
+        {% for producto in productos %}
+            <div class="flex justify-between mt-4">
+                <span>{{ producto.nombre }} ({{ producto.cantidad }})</span>
+                <span>${{ producto.total_por_producto | round(2) }}</span>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Botón realizar pago -->
+<div class="w-full mt-6 text-center">
+    <form action="{{ url_for('confirmar_pedido') }}" method="post">
+        <button type="submit" class="bg-black text-white rounded hover:bg-gray-700 w-full">REALIZAR PAGO</button>
+    </form>
+</div>
+
+<!-- Modal para nueva tarjeta -->
+<div id="modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center hidden">
+    <div class="bg-gray-800 p-6 rounded-lg text-white max-w-lg w-full">
+        <button class="text-red-500 text-xl float-right" onclick="toggleModal()">✖</button>
+        <h2 class="text-2xl mb-4">Nueva tarjeta</h2>
+        <form id="tarjetaForm" onsubmit="guardarTarjeta(event)">
+            <div class="mb-4">
+                <label for="numero-tarjeta" class="block mb-2">Número de Tarjeta</label>
+                <input type="text" id="numero-tarjeta" name="numero_tarjeta" class="w-full p-2 bg-gray-700 rounded" required>
+            </div>
+            <div class="mb-4">
+                <label for="titular" class="block mb-2">Titular</label>
+                <input type="text" id="titular" name="titular" class="w-full p-2 bg-gray-700 rounded" required>
+            </div>
+            <div class="mb-4">
+                <label for="fecha-expiracion" class="block mb-2">Fecha de Expiración</label>
+                <input type="text" id="fecha-expiracion" name="fecha_expiracion" class="w-full p-2 bg-gray-700 rounded" required>
+            </div>
+            <div class="mb-4">
+                <label for="cvv" class="block mb-2">CVV</label>
+                <input type="text" id="cvv" name="cvv" class="w-full p-2 bg-gray-700 rounded" required>
+            </div>
+            <input type="hidden" id="tipo-tarjeta" name="tipo_tarjeta" value="debito">
+            <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Guardar</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

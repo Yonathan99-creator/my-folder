@@ -1,0 +1,47 @@
+{% extends 'principal.html' %}
+
+{% block body %}
+
+<!-- Carrito -->
+<section class="p-4 bg-gray-900 text-white">
+    <h1 class="text-2xl font-bold mb-4">CARRITO</h1>
+
+    <!-- Artículos -->
+    <div>
+        {% for producto in productos %}
+            <div class="flex items-center justify-between py-4 border-b border-gray-700">
+                <div class="mx-4 flex-1">
+                    <h2 class="font-semibold">{{ producto.nombre }} {{ producto.marca }}</h2>
+                    <div class="flex items-center">
+                        <p class="mr-2">Cant: <span>{{ producto.cantidad }}</span></p>
+                        <form action="{{ url_for('eliminar_producto_carrito', producto_id=producto.id) }}" method="post" style="display:inline;">
+                            <button type="submit" class="ml-4 text-red-500">
+                                <i class="fa-solid fa-trash"></i> Eliminar
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <p class="text-red-500">${{ producto.total_por_producto | round(2) }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Resumen de Orden -->
+    <div class="bg-gray-800 p-4 mt-6 rounded">
+        <h2 class="text-xl font-bold">RESUMEN DE ORDEN</h2>
+        <div class="mt-2 text-sm">
+            {% set total = productos|sum(attribute='total_por_producto') %}
+            <p class="font-bold text-lg mt-4">TOTAL: ${{ total | round(2) }}</p>
+        </div>
+    </div>
+
+    <!-- Botón continuar -->
+    <div class="mt-6 text-center">
+        <button onclick="location.href='/pago'" class="bg-black text-white py-2 px-4 rounded hover:bg-gray-700">CONTINUAR</button>
+    </div>
+
+    <!-- Nota -->
+    <p class="mt-4 text-center text-sm text-gray-400">Garantizamos tu satisfacción con cada uno de nuestros productos o: ¡Te devolvemos tu dinero!</p>
+</section>
+
+{% endblock %}

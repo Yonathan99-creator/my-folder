@@ -1,0 +1,42 @@
+{% extends 'principal.html' %}
+
+{% block body %}
+
+<section class="bg-gray-900 text-white p-4">
+    <h1 class="text-2xl font-bold mb-6">Compras</h1>
+
+    <!-- Barra de búsqueda -->
+    <div class="flex items-center mb-4">
+        <input type="text" id="searchInput" placeholder="Buscar" class="w-full p-2 bg-gray-800 rounded text-white focus:outline-none">
+    </div>
+
+    <!-- Lista de compras -->
+    <div id="shoppingList" class="space-y-4">
+        {% for pedido in pedidos %}
+        <div class="bg-gray-800 p-4 rounded-md pedido-item">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h2 class="text-sm font-semibold">{{ pedido[4] }}</h2>
+                    <div class="mt-2">
+                        {% if pedido[3] == 'pendiente' %}
+                        <p class="text-orange-500">{{ pedido[3] }}</p>
+                        {% elif pedido[3] == 'enviado' %}
+                        <p class="text-yellow-500">{{ pedido[3] }}</p>
+                        {% elif pedido[3] == 'entregado' %}
+                        <p class="text-green-500">{{ pedido[3] }}</p>
+                        {% elif pedido[3] == 'cancelado' %}
+                        <p class="text-red-500">{{ pedido[3] }}</p>
+                        {% else %}
+                        <p class="text-white">{{ pedido[3] }}</p>
+                        {% endif %}
+                        <p>Total: ${{ pedido[2] }}</p>
+                    </div>
+                </div>
+                <a href="{{ url_for('detalle_compra', pedido_id=pedido[0]) }}" class="bg-blue-500 p-2 rounded hover:bg-blue-600">Ver compra</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

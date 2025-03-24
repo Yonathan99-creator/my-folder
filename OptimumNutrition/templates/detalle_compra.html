@@ -1,0 +1,59 @@
+{% extends 'principal.html' %}
+
+{% block body %}
+
+<section class="bg-gray-900 text-white p-6">
+    <h1 class="text-3xl font-bold mb-6">Detalles de la Compra</h1>
+
+    <!-- Encabezado de Compra -->
+    <div class="mb-6">
+        <h2 class="text-xl font-semibold">Compra #{{ pedido[0] }}</h2>
+        <p class="text-sm text-gray-400">Fecha de compra: {{ pedido[4] }}</p>
+    </div>
+
+    <!-- Estado de Entrega -->
+    <div class="mb-6 p-4 bg-gray-800 rounded">
+        <h2 class="text-lg font-bold mb-2">Estado de Entrega</h2>
+        {% if pedido[3] == 'pendiente' %}
+        <p class="text-orange-500">{{ pedido[3] }}</p>
+        {% elif pedido[3] == 'enviado' %}
+        <p class="text-yellow-500">{{ pedido[3] }}</p>
+        {% elif pedido[3] == 'entregado' %}
+        <p class="text-green-500">{{ pedido[3] }}</p>
+        {% elif pedido[3] == 'cancelado' %}
+        <p class="text-red-500">{{ pedido[3] }}</p>
+        {% else %}
+        <p class="text-white">{{ pedido[3] }}</p>
+        {% endif %}
+        <p class="text-sm text-gray-400">{{ pedido[5] }}</p>
+    </div>
+
+    <!-- Detalles de Productos -->
+    <div class="space-y-4 mb-6">
+        <h2 class="text-lg font-bold mb-4">Artículos Comprados</h2>
+        {% for producto in productos %}
+        <div class="p-4 bg-gray-800 rounded flex items-center">
+            <div>
+                <h3 class="font-semibold">Producto ID: {{ producto[0] }}</h3>
+                <p class="text-sm">Cantidad: {{ producto[1] }}</p>
+                <p class="text-sm">Precio total: ${{ producto[2] }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Resumen de Orden -->
+    <div class="bg-gray-800 p-4 rounded">
+        <h2 class="text-lg font-bold mb-4">Resumen de Orden</h2>
+        <div class="text-sm space-y-2">
+            <p class="font-bold text-lg mt-4">Total: ${{ pedido[2] }}</p>
+        </div>
+    </div>
+
+    <!-- Botón para regresar -->
+    <div class="mt-6 text-center">
+        <button onclick="window.history.back()" class="bg-blue-500 py-2 px-4 rounded hover:bg-blue-600">Volver a Compras</button>
+    </div>
+</section>
+
+{% endblock %}
