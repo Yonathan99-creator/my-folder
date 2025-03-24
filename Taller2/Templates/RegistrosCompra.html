@@ -1,0 +1,203 @@
+{% extends 'index.html' %}
+
+{% block body %}
+<div class="menu">
+    <ion-icon name="menu-outline"></ion-icon>
+    <ion-icon name="close-outline"></ion-icon>
+</div>
+
+<div class="barra-lateral">
+    <div>
+        <div class="nombre-pagina">
+            <ion-icon id="cloud" name="chevron-forward-circle-outline"></ion-icon>
+            <span>Taller de motos</span>
+        </div>
+        <a href="/compra" style="text-decoration: none; outline: none;">
+            <button class="boton">
+                <ion-icon name="add-outline"></ion-icon>
+                <span>Agregar nuevo registro</span>
+            </button>
+        </a>
+    </div>
+
+    <nav class="navegacion">
+        <ul>
+            {% if 'user_type' in session and session['user_type'] == 1 %}
+            <!-- Mostrar opciones adicionales solo para el admin -->
+            <li>
+                <a href="/usuario">
+                    <ion-icon name="person-outline"></ion-icon>
+                    <span>Usuarios</span>
+                </a>
+            </li>
+            {% elif 'user_type' in session and session['user_type'] == 2 %}
+            {% endif %}
+            <li>
+                <a href="/cliente">
+                    <ion-icon name="star-outline"></ion-icon>
+                    <span>Clientes</span>
+                </a>
+            </li>
+            {% if 'user_type' in session and session['user_type'] == 1 %}
+            <!-- Mostrar opciones adicionales solo para el admin -->
+            <li>
+                <a href="/proveedor">
+                    <ion-icon name="receipt-outline"></ion-icon>
+                    <span>Proveedores</span>
+                </a>
+            </li>
+            {% elif 'user_type' in session and session['user_type'] == 2 %}
+            {% endif %}
+            {% if 'user_type' in session and session['user_type'] == 1 %}
+            <!-- Mostrar opciones adicionales solo para el admin -->
+            <li>
+                <a href="/inventario">
+                    <ion-icon name="newspaper-outline"></ion-icon>
+                    <span>Inventario</span>
+                </a>
+            </li>
+            {% elif 'user_type' in session and session['user_type'] == 2 %}
+            {% endif %}
+            <li>
+                <a href="/venta">
+                    <ion-icon name="receipt-outline"></ion-icon>
+                    <span>Ventas</span>
+                </a>
+            </li>
+            {% if 'user_type' in session and session['user_type'] == 1 %}
+            <!-- Mostrar opciones adicionales solo para el admin -->
+            <li>
+                <a href="/compra">
+                    <ion-icon name="bag-add-outline"></ion-icon>
+                    <span>Compras</span>
+                </a>
+            </li>
+            {% elif 'user_type' in session and session['user_type'] == 2 %}
+            {% endif %}
+            {% if 'user_type' in session and session['user_type'] == 1 %}
+            <!-- Mostrar opciones adicionales solo para el admin -->
+            <li>
+                <a href="/bitacora">
+                    <ion-icon name="information-circle-outline"></ion-icon>
+                    <span>Bitacora</span>
+                </a>
+            </li>
+            {% elif 'user_type' in session and session['user_type'] == 2 %}
+            {% endif %}
+            {% if 'user_type' in session and session['user_type'] == 1 %}
+            <!-- Mostrar opciones adicionales solo para el admin -->
+            <li class="lista">
+                <a class="lista_int" href="#">
+                    <ion-icon name="attach-outline"></ion-icon>
+                    <span>Registros</span>
+                    <ion-icon class="chevron-icon" name="chevron-forward-outline"></ion-icon>
+                </a>
+
+                <ul class="lista_most">
+                    <li class="lista_interior">
+                        <a href="/registrosventa" class="lista_interior_opcion">
+                            <ion-icon name="checkmark-circle-outline"></ion-icon>
+                            Ventas hechas
+                        </a>
+                    </li>
+                    <li class="lista_interior">
+                        <a href="/registroscompra" class="lista_interior_opcion">
+                            <ion-icon name="document-attach-outline"></ion-icon>
+                            Compras hechas
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            {% elif 'user_type' in session and session['user_type'] == 2 %}
+            {% endif %}
+        </ul>
+    </nav>
+
+    <div>
+        <div class="linea"></div>
+
+        <div class="modo-oscuro">
+            <div class="info">
+                <ion-icon name="moon-outline"></ion-icon>
+                <span>Modo Obscuro</span>
+            </div>
+            <div class="switch">
+                <div class="base">
+                    <div class="circulo">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usuario">
+            <img src="/Jhampier.jpg" alt="">
+            <div class="info-usuario">
+                <div class="nombre-email">
+                    {% if 'user_name' in session %}
+                        <a class="nombre barra-lateral-nombre" href="/logout">Cerrar sesión</a>
+                        <a class="email barra-lateral-email">{{ session['user_name'] }}</a>
+                    {% else %}
+                        <a class="nav-link" href="/login">Iniciar sesión</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>    
+    </div>
+</div>
+
+
+<main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                <ul class="list-unstyled">
+                    <li>{{ message }}</li>
+                </ul>
+                <button type="button" class="btn-close" id="closeAlert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <div class="table" id="customers_table">
+        <section class="table__header">
+            <h1>Compras</h1>
+            <div class="input-group">
+                <input type="search" placeholder="Search Data..." id="searchInput">
+                <img src="static/imagenes/search.png" alt="">
+            </div>
+        </section>
+        <section class="table__body">
+            <table>
+                <thead>
+                    <tr>
+                        <th data-column="Folio"> Folio <span class="icon-arrow">&UpArrow;</span></th>
+                        <th data-column="Fecha"> Fecha <span class="icon-arrow">&UpArrow;</span></th>
+                        <th data-column="Proveedor"> Proveedor <span class="icon-arrow">&UpArrow;</span></th>
+                        <th data-column="Usuario"> Usuario <span class="icon-arrow">&UpArrow;</span></th>
+                        <th data-column="Total"> Total General <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Operaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for registro in registros %}
+                        <tr>
+                            <td data-column="Folio">{{ registro[0] }}</td>
+                            <td data-column="Fecha">{{ registro[1] }}</td>
+                            <td data-column="Proveedor">{{ registro[2] }}</td>
+                            <td data-column="Usuario">{{ registro[5] }}</td>
+                            <td data-column="Total">{{ registro[4] }}</td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a href="{{ url_for('reimpresion_c', id=registro[0]) }}" class="btn-edit">Reimpresion</a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </div>
+</main>
+{% endblock %}

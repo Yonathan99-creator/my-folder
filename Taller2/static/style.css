@@ -1,0 +1,1473 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500&display=swap');
+:root{
+    --color-barra-lateral:rgb(255,255,255);
+
+    --color-texto:rgb(0,0,0);
+    --color-texto-menu:rgb(134,136,144);
+
+    --color-menu-hover:rgb(238,238,238);
+    --color-menu-hover-texto:rgb(0,0,0);
+
+    --color-boton:rgb(0,0,0);
+    --color-boton-texto:rgb(255,255,255);
+
+    --color-linea:rgb(180,180,180);
+
+    --color-switch-base :rgb(201,202,206);
+    --color-switch-circulo:rgb(241,241,241);
+
+    --color-scroll:rgb(192,192,192);
+    --color-scroll-hover:rgb(134,134,134);
+}
+
+.dark-mode{
+    --color-barra-lateral:rgb(44,45,49);
+
+    --color-texto:rgb(255,255,255);
+    --color-texto-menu:rgb(110,110,117);
+
+    --color-menu-hover:rgb(0,0,0);
+    --color-menu-hover-texto:rgb(238,238,238);
+
+    --color-boton:rgb(255,255,255);
+    --color-boton-texto:rgb(0,0,0);
+
+    --color-linea:rgb(90,90,90);
+
+    --color-switch-base :#4fc3dc;
+    --color-switch-circulo:rgb(255,255,255);
+
+    --color-scroll:rgb(68,69,74);
+    --color-scroll-hover:rgb(85,85,85);
+}
+
+
+/*-------------Formulario*/
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 94vh;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    border-radius: 30px;
+    padding: 30px;
+}
+
+.wrapper span {
+    font-size: 36px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.wrapper .input-box.custom-select select {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, .2);
+    border-radius: 40px;
+    font-size: 16px;
+    color: #fff;
+    padding: 15px 45px 15px 20px;
+}
+
+.wrapper .input-box.custom-select select option {
+    background-color: #333;
+    color: #fff;
+}
+
+.wrapper .input-box.custom-select select:hover,
+.wrapper .input-box.custom-select select:focus {
+    color: #fff;
+}
+
+.wrapper .input-box.custom-file {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper .input-box.custom-file label {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #fff;
+}
+
+.wrapper .input-box.custom-file input {
+    width: 100%;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    border-radius: 40px;
+    font-size: 16px;
+    color: #fff;
+    padding: 20px 45px 20px 22px;
+    cursor: pointer;
+}
+
+.wrapper .input-box.custom-file input:hover {
+    background: #3ea9c4;
+}
+
+.wrapper .input-box.custom-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.input-box.custom-button button {
+    width: 100%;
+    height: 50px;
+    background: #4fc3dc;
+    border: none;
+    outline: none;
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    font-size: 18px;
+    color: #fff;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.wrapper h1{
+    font-size: 42px;
+    text-align: center;
+    margin-bottom: 20px;font-size: 36px;
+    text-align: center;
+}
+
+.wrapper form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+}
+
+.wrapper .input-box{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 20px 0;
+}
+
+.input-box input,
+.input-box select {
+    width: 100%;
+    height: 45px;
+    background: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 40px;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px;
+    transition: border-bottom-color 0.3s ease;
+    padding: 20px 45px 20px 20px;
+}
+
+.input-box input::placeholder,
+.input-box select::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.input-box input:focus,
+.input-box select:focus {
+    border-bottom-color: #4fc3dc;
+}
+
+.input-box i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.wrapper .btn{
+    width: 100%;
+    height: 45px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);    
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+}
+
+
+/*-----------------Cuerpo y burbujas*/
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+body{
+    height: 100%;
+    width: 100%;
+    background: #0c192c;
+}
+
+.container {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.bubbles{
+    position: absolute;
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.bubbles span{
+    position: relative;
+    width: 30px;
+    height: 30px;
+    background: #4fc3dc;
+    margin: 0 4px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 10px #4fc3dc44,
+    0 0 50px #4fc3dc,
+    0 0 100px #4fc3dc;
+    animation: animate 15s linear infinite;
+    animation-duration: calc(125s / var(--i));
+}
+
+.bubbles span:nth-child(even){
+    background: #ff2d75;
+    box-shadow: 0 0 0 10px #ff2d7544,
+    0 0 50px #ff2d75,
+    0 0 100px #ff2d75;
+}
+
+@keyframes animate {
+    0% {
+        transform: translateY(100vh) scale(0);
+    }
+    100% {
+        transform: translateY(-10vh) scale(1);
+    }
+}
+
+/*-----------------Menu*/
+.menu{
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: var(--color-boton);
+    color: var(--color-boton-texto);
+    right: 15px;
+    top: 15px;
+    z-index: 100;
+}
+
+/*----------------Barra Lateral*/
+.barra-lateral{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 290px;
+    height: 100%;
+    overflow: hidden;
+    padding: 20px 15px;
+    background-color: var(--color-barra-lateral);
+    transition: width 0.5s ease,background-color 0.3s ease,left 0.5s ease;
+    z-index: 50;
+}
+
+.mini-barra-lateral{
+    width: 80px;
+}
+.barra-lateral span{
+    width: 100px;
+    white-space: nowrap;
+    font-size: 18px;
+    text-align: left;
+    opacity: 1;
+    transition: opacity 0.5s ease,width 0.5s ease;
+}
+.barra-lateral span.oculto{
+    opacity: 0;
+    width: 0;
+}
+
+/*------------> Nombre de la página */
+.barra-lateral .nombre-pagina{
+    width: 100%;
+    height: 45px;
+    color: var(--color-texto);
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+}
+.barra-lateral .nombre-pagina ion-icon{
+    min-width: 50px;
+    font-size: 40px;
+    cursor: pointer;
+}
+.barra-lateral .nombre-pagina span{
+    margin-left: 5px;
+    font-size: 25px;
+}
+
+
+/*------------> Botón*/
+.barra-lateral .boton{
+    width: 100%;
+    height: 45px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--color-boton);
+    color: var(--color-boton-texto);
+}
+.barra-lateral .boton ion-icon{
+    min-width: 50px;
+    font-size: 25px;
+}
+
+
+/*--------------> Menu Navegación*/
+.barra-lateral .navegacion{
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.barra-lateral .navegacion::-webkit-scrollbar{
+    width: 5px;
+}
+.barra-lateral .navegacion::-webkit-scrollbar-thumb{
+    background-color: var(--color-scroll);
+    border-radius: 5px;
+}
+.barra-lateral .navegacion::-webkit-scrollbar-thumb:hover{
+    background-color: var(--color-scroll-hover);
+}
+.barra-lateral .navegacion li{  
+    list-style: none;
+    display: flex;
+    margin-bottom: 5px;
+}
+.barra-lateral .navegacion a{
+    width: 100%;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 10px;
+    color: var(--color-texto-menu);
+}
+.barra-lateral .navegacion a:hover{
+    background-color: var(--color-menu-hover);
+    color: var(--color-menu-hover-texto);
+}
+.barra-lateral .navegacion ion-icon{
+    min-width: 50px;
+    font-size: 20px;
+}
+
+/*-----------------> Linea*/
+.barra-lateral .linea{
+    width: 100%;
+    height: 1px;
+    margin-top: 15px;
+    background-color: var(--color-linea);
+}
+
+/*----------------> Modo Oscuro*/
+.barra-lateral .modo-oscuro{
+    width: 100%;
+    margin-bottom: 80px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.barra-lateral .modo-oscuro .info{
+    width: 200px;
+    height: 45px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    color: var(--color-texto-menu);
+}
+.barra-lateral .modo-oscuro ion-icon{
+
+    width: 50px;
+    font-size: 20px;
+}
+
+/*--->switch*/
+.barra-lateral .modo-oscuro .switch{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 50px;
+    height: 45px;
+    cursor: pointer;
+}
+.barra-lateral .modo-oscuro .base{
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 35px;
+    height: 20px;
+    background-color: var(--color-switch-base);
+    border-radius: 50px;
+}
+.barra-lateral .modo-oscuro .circulo{
+    position: absolute;
+    width: 18px;
+    height: 90%;
+    background-color: var(--color-switch-circulo);
+    border-radius: 50%;
+    left: 2px;
+    transition: left 0.5s ease;
+}
+.barra-lateral .modo-oscuro .circulo.prendido{
+    left: 15px;
+}
+
+/*---------------> Pequeño menu deplegable*/
+.lista {
+    width: 100%;
+    position: relative;
+}
+
+.lista_int {
+    cursor: pointer;
+}
+
+.lista_most {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    text-align: left;
+    background-color: var(--color-barra-lateral);
+    border-radius: 0 0 10px 10px;
+    display: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.lista.active .lista_most {
+    display: block;
+}
+
+.lista_interior {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.lista_interior_opcion {
+    width: 100%;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    text-decoration: none;
+    border-radius: 10px;
+    color: var(--color-texto-menu);
+}
+
+.lista_interior_opcion:hover {
+    background-color: var(--color-menu-hover);
+    color: var(--color-menu-hover-texto);
+}
+
+
+/*---------------> Usuario*/
+.barra-lateral .usuario .nombre {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-texto);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.barra-lateral .usuario .nombre:hover {
+    color: var(--color-destacado);
+}
+
+.barra-lateral .usuario{
+    width: 100%;
+    display: flex;
+}
+
+.barra-lateral .usuario .info-usuario{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--color-texto);
+    overflow: hidden;
+}
+.barra-lateral .usuario .nombre-email{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 5px;
+}
+.barra-lateral .usuario .nombre{
+    font-size: 15px;
+    font-weight: 600;
+}
+.barra-lateral .usuario .email{
+    font-size: 13px;
+}
+.barra-lateral .usuario ion-icon{
+    font-size: 20px;
+}
+
+
+/*-------------main*/
+main {
+    margin-left: 300px;
+    padding: 20px;
+    transition: margin-left 0.5s ease;
+}
+
+main.min-main {
+    margin-left: 80px;
+}
+
+
+/*-------------Tabla*/
+div.table {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5vw;
+    padding-bottom: 10vh;
+    width: 100%;
+    height: 94vh;
+    background-color: #fff5;
+    backdrop-filter: blur(7px);
+    box-shadow: 0 .4rem .8rem #0005;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.table__header {
+    width: 100%;
+    height: 10%;
+    background-color: #fff4;
+    padding: .8rem 1rem;
+    border-radius: .6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.table__header .input-group {
+    width: 35%;
+    height: 100%;
+    background-color: #fff5;
+    padding: 0 .8rem;
+    border-radius: 2rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: .2s;
+}
+
+.table__header .input-group:hover {
+    width: 45%;
+    background-color: #fff8;
+    box-shadow: 0 .1rem .4rem #0002;
+}
+
+.table__header .input-group img {
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.table__header .input-group input {
+    width: 100%;
+    padding: 0 .5rem 0 .3rem;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.table__body {
+    width: 100%;
+    max-height: calc(89% - 1.6rem);
+    background-color: #fffb;
+    margin: .8rem auto;
+    border-radius: .6rem;
+    overflow: auto;
+    overflow: overlay;
+}
+
+.table__body::-webkit-scrollbar{
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+.table__body::-webkit-scrollbar-thumb{
+    border-radius: .5rem;
+    background-color: #0004;
+    visibility: hidden;
+}
+
+.table__body:hover::-webkit-scrollbar-thumb{ 
+    visibility: visible;
+}
+
+table {
+    width: 100%;
+}
+
+td img {
+    width: 36px;
+    height: 36px;
+    margin-right: .5rem;
+    border-radius: 50%;
+
+    vertical-align: middle;
+}
+
+table, th, td {
+    border-collapse: collapse;
+    padding: 1rem;
+    text-align: center;
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: #d5d1defe;
+    cursor: pointer;
+    text-transform: capitalize;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #0000000b;
+}
+
+tbody tr {
+    --delay: .1s;
+    transition: .5s ease-in-out var(--delay), background-color 0s;
+}
+
+tbody tr.hide {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+tbody tr:hover {
+    background-color: #fff6 !important;
+}
+
+tbody tr td,
+tbody tr td p,
+tbody tr td img {
+    transition: .2s ease-in-out;
+}
+
+tbody tr.hide td,
+tbody tr.hide td p {
+    padding: 0;
+    font: 0 / 0 sans-serif;
+    transition: .2s ease-in-out .5s;
+}
+
+tbody tr.hide td img {
+    width: 0;
+    height: 0;
+    transition: .2s ease-in-out .5s;
+}
+
+.btn-edit, .btn-delete {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 5px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff;
+    border-radius: 5px;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+}
+
+
+@media (max-width: 1000px) {
+    td:not(:first-of-type) {
+        min-width: 12.1rem;
+    }
+}
+
+thead th span.icon-arrow {
+    display: inline-block;
+    width: 1.3rem;
+    height: 1.3rem;
+    border-radius: 50%;
+    border: 1.4px solid transparent;
+    
+    text-align: center;
+    font-size: 1rem;
+    
+    margin-left: .5rem;
+    transition: .2s ease-in-out;
+}
+
+thead th:hover span.icon-arrow{
+    border: 1.4px solid #6c00bd;
+}
+
+thead th:hover {
+    color: #6c00bd;
+}
+
+thead th.active span.icon-arrow{
+    background-color: #6c00bd;
+    color: #fff;
+}
+
+thead th.asc span.icon-arrow{
+    transform: rotate(180deg);
+}
+
+thead th.active,tbody td.active {
+    color: #6c00bd;
+}
+
+/*------------------> Responsive*/
+@media (max-height: 660px){
+    .barra-lateral .nombre-pagina{
+        margin-bottom: 5px;
+    }
+    .barra-lateral .modo-oscuro{
+        margin-bottom: 3px;
+    }
+}
+@media (max-width: 600px){
+    .barra-lateral{
+        position: fixed;
+        left: -250px;
+    }
+    .max-barra-lateral{
+        left: 0;
+    }
+    .menu{
+        display: flex;
+    }
+    .menu ion-icon:nth-child(2){
+        display: none;
+    }
+    main{
+        margin-left: 0;
+    }
+    main.min-main{
+        margin-left: 0;
+    }
+    
+}
+
+/* Botón de cierre */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-success {
+    color: #4fc3dc;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    box-shadow: 0 0 25px #4fc3dc;
+}
+
+.alert-danger {
+    color: #ff2d75;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    box-shadow: 0 0 25px #ff2d75;
+}
+
+.btn-close {
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+}
+
+.btn-close:hover {
+    color: #000;
+    text-decoration: none;
+    opacity: .75;
+}
+
+.alert {
+    position: relative;
+    padding: 15px 40px 15px 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.btn-close {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    line-height: 1;
+    color: #000;
+    opacity: 0.5;
+    border: none;
+    background: transparent;
+}
+
+.btn-close:hover {
+    opacity: 0.75;
+}
+
+.btn-close::after {
+    content: '×';
+}
+
+.alert ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+/* Ventana compra y venta */
+
+.wrapper2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    max-width: 500px;
+    height: auto;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    border-radius: 30px;
+    padding: 30px;
+    margin: 20vh auto;
+}
+
+.wrapper2 h2 {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.wrapper2 form {
+    width: 100%;
+}
+
+.wrapper2 .input-box.custom-button2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.input-box.custom-button2 button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    max-width: 300px;
+    height: 50px;
+    background: #4fc3dc;
+    border: none;
+    outline: none;
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #fff;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.wrapper2 .btn2 {
+    width: 80%;
+    max-width: 300px;
+    height: auto;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);    
+    cursor: pointer;
+    font-size: 1rem;
+    color: #333;
+    font-weight: 600;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.wrapper2 .btn2,
+.wrapper2 a.btn-link {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    max-width: 300px;
+    height: 50px;
+    background: #4fc3dc;
+    border: none;
+    outline: none;
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.wrapper2 .btn2:hover,
+.wrapper2 a.btn-link:hover {
+    background: #45b8cc;
+    text-decoration: none;
+}
+
+/* Compra y Venta */
+
+.cont_completo {
+    width: 100%;
+    height: 94vh;
+    height: auto;
+    overflow: hidden;
+    backdrop-filter: blur(0.1px);
+    color: #fff;
+    border-radius: 30px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.cont_completo h1 {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.cont_completo .cont_total {
+    width: 40%;
+    max-width: 500px;
+    height: 50px;
+    text-align: right;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    border-radius: 30px;
+    padding: 3px;
+    margin-left: auto;
+    font-size: 36px;
+    display: flex;
+    justify-content: right;
+    overflow: hidden; 
+}
+
+.cont_completo .cont_comp_general {
+    text-align: center;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 90px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    border-radius: 30px;
+    margin-top: 30px;
+}
+
+.cont_completo .cont_desc {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 364px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    border-radius: 30px;
+    padding: 10px;
+    margin-top: 30px;
+}
+
+/* Ajustes para el contenedor del grid */
+.grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.grid-container .input-box {
+    margin: 0 10px;
+}
+
+                                                        /* Tabla de desc*/
+
+/* Ajustes para la tabla */
+
+.table3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+    width: 100%;
+    min-height: 50px;
+    max-height: 200px;
+    overflow: auto;
+    border-radius: 30px;
+    color: black;
+}
+
+.table3 .table__header {
+    width: 100%;
+    height: 20px;
+    background-color: #fff4;
+    padding: 5px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.table3 .table__header .input-group {
+    width: 35%;
+    height: 100%;
+    background-color: #fff5;
+    padding: 0 8px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .2s;
+}
+
+.table3 .table__header .input-group:hover {
+    width: 45%;
+    background-color: #fff8;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+}
+
+.table3 .table__header .input-group img {
+    width: 12px;
+    height: 12px;
+}
+
+.table3 .table__header .input-group input {
+    width: 100%;
+    padding: 0 5px 0 3px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 12px;
+}
+
+.table3 .table__body {
+    width: 100%;
+    height: calc(100% - 20px);
+    background-color: #fffb;
+    margin: 5px auto;
+    border-radius: 6px;
+    overflow: auto;
+    overflow: overlay;
+}
+
+.table3 table {
+    width: 100%;
+}
+
+.table3 td img {
+    width: 36px;
+    height: 36px;
+    margin-right: 5px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.table3 table,
+.table3 th,
+.table3 td {
+    border-collapse: collapse;
+    padding: 8px;
+    text-align: center;
+}
+
+.table3 thead th {
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: #d5d1de;
+    cursor: pointer;
+    text-transform: capitalize;
+    height: 20px;
+}
+
+.table3 tbody tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.table3 tbody tr {
+    --delay: .1s;
+    transition: .5s ease-in-out var(--delay), background-color 0s;
+}
+
+.table3 tbody tr.hide {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+.table3 tbody tr:hover {
+    background-color: #fff6 !important;
+}
+
+.table3 tbody tr td,
+.table3 tbody tr td p,
+.table3 tbody tr td img {
+    transition: .2s ease-in-out;
+}
+
+.table3 tbody tr.hide td,
+.table3 tbody tr.hide td p {
+    padding: 0;
+    font: 0 / 0 sans-serif;
+    transition: .2s ease-in-out .5s;
+}
+
+.table3 tbody tr.hide td img {
+    width: 0;
+    height: 0;
+    transition: .2s ease-in-out .5s;
+}
+
+.table3 .status {
+    padding: 4px 0;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.table3 .btn-edit,
+.table3 .btn-delete {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 5px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff;
+    border-radius: 5px;
+}
+
+.table3 .btn-delete {
+    background-color: #dc3545;
+}
+
+@media (max-width: 1000px) {
+    .table3 td:not(:first-of-type) {
+        min-width: 12.1rem;
+    }
+}
+
+.table3 thead th span.icon-arrow {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    border: 1.4px solid transparent;
+    text-align: center;
+    font-size: 10px;
+    margin-left: 5px;
+    transition: .2s ease-in-out;
+}
+
+.table3 thead th:hover span.icon-arrow {
+    border: 1.4px solid #6c00bd;
+}
+
+.table3 thead th:hover {
+    color: #6c00bd;
+}
+
+.table3 thead th.active span.icon-arrow {
+    background-color: #6c00bd;
+    color: #fff;
+}
+
+.table3 thead th.asc span.icon-arrow {
+    transform: rotate(180deg);
+}
+
+.table3 thead th.active,
+.table3 tbody td.active {
+    color: #6c00bd;
+}
+
+                                                        /* Parte de lo de los input general*/
+
+/* Estilos para los inputs y selects dentro del formulario */
+.cont_comp_general input[type="text"],
+.cont_comp_general input[type="number"],
+.cont_comp_general select {
+    width: 100%;
+    height: 45px;
+    background: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 40px;
+    color: #fff;
+    font-size: 12px;
+    padding: 10px;
+    transition: border-bottom-color 0.3s ease;
+}
+
+.cont_comp_general input[type="text"]::placeholder,
+.cont_comp_general input[type="number"]::placeholder,
+.cont_comp_general select::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.cont_comp_general input[type="text"]:focus,
+.cont_comp_general input[type="number"]:focus,
+.cont_comp_general select:focus {
+    border-bottom-color: #4fc3dc;
+}
+
+.cont_comp_general select option {
+    background-color: #333;
+    color: #fff;
+}
+
+/* Estilos para el contenedor general */
+.cont_comp_general {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+}
+
+/* Estilos para cada sección dentro del contenedor */
+.cont_comp_general > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.cont_comp_general > div > span {
+    color: #fff;
+    margin-bottom: 2px;
+}
+
+.cont_comp_general > div > input::placeholder,
+.cont_comp_general > div > select::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.cont_comp_general > div > input:focus,
+.cont_comp_general > div > select:focus {
+    border-bottom-color: #4fc3dc;
+}
+
+/* Estilos adicionales para selects */
+.cont_comp_general > div > select {
+    padding: 15px 45px 15px 20px;
+    cursor: pointer;
+}
+
+.cont_comp_general > div > select option {
+    background-color: #333;
+    color: #fff;
+}
+
+.cont_completo .cont_comp_general {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+}
+
+.cont_total {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    align-items: center; 
+}
+
+.cont_total span {
+    justify-self: end;
+    margin-left: 30px;
+}
+
+.cont_total input[type="text"],
+.cont_total input[type="number"],
+.cont_total select {
+    width: 100%;
+    height: 23px;
+    background: transparent;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    color: #fff;
+    font-size: 30px;
+    padding: 10px;
+    transition: border-bottom-color 0.3s ease;
+}
+
+.cont_completo .cont_comp_general {
+    overflow-y: auto;
+}
+
+                                                        /* Parte de lo de los input contenedor descripcion*/
+
+/* Estilos para los inputs y selects dentro del formulario */
+.cont_desc input[type="text"],
+.cont_desc input[type="number"],
+.cont_desc select {
+    width: calc(100% - 20px);
+    height: 25px;
+    background: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 40px;
+    color: #fff;
+    font-size: 12px;
+    padding: 2px;
+    margin-bottom: 10px;
+    transition: border-bottom-color 0.3s ease;
+}
+
+.cont_desc input[type="text"]::placeholder,
+.cont_desc input[type="number"]::placeholder,
+.cont_desc select::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.cont_desc input[type="text"]:focus,
+.cont_desc input[type="number"]:focus,
+.cont_desc select:focus {
+    border-bottom-color: #4fc3dc;
+}
+
+/* Estilos adicionales para selects */
+.cont_desc select {
+    padding: 2px 40px 4px 15px;
+    cursor: pointer;
+}
+
+.cont_desc select option {
+    background-color: #333;
+    color: #fff;
+}
+
+/* Ajustes para botones dentro del formulario */
+.cont_desc button[type="submit"] {
+    width: calc(100% - 20px);
+    height: 25px;
+    background: #4fc3dc;
+    border: none;
+    outline: none;
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    font-size: 12px;
+    color: #fff;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    margin-top: 5px; /* Ajuste del margen superior */
+}
+
+#addProductoBtn {
+    height: 25px;
+    font-size: 14px;
+}
+
+.cont_completo .cont_desc {
+    overflow-y: auto;
+}
+
+                                                /* Parte de lo de la venta general acomodo*/
+
+.subgrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+                                                /* Parte de la ventana principal*/
+
+/* Estilos para la página principal */
+
+.welcome-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.welcome-container h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.welcome-container p {
+    font-size: 18px;
+    color: #ffffff;
+    line-height: 1.6;
+}

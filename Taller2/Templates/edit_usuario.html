@@ -1,0 +1,209 @@
+{% extends 'index.html' %}
+
+{% block body %}
+<div class="menu">
+    <ion-icon name="menu-outline"></ion-icon>
+    <ion-icon name="close-outline"></ion-icon>
+</div>
+
+<div class="barra-lateral">
+    <div>
+        <div class="nombre-pagina">
+            <ion-icon id="cloud" name="chevron-forward-circle-outline"></ion-icon>
+            <span>Taller de motos</span>
+        </div>
+        <a href="/add_usuario" style="text-decoration: none; outline: none;">
+            <button class="boton">
+                <ion-icon name="add-outline"></ion-icon>
+                <span>Agregar nuevo registro</span>
+            </button>
+        </a>
+    </div>
+
+    <nav class="navegacion">
+        <ul>
+            {% if 'user_type' in session and session['user_type'] == 1 %}
+            <!-- Mostrar opciones adicionales solo para el admin -->
+            <li>
+                <a href="/usuario">
+                    <ion-icon name="person-outline"></ion-icon>
+                    <span>Usuarios</span>
+                </a>
+            </li>
+            {% elif 'user_type' in session and session['user_type'] == 2 %}
+            {% endif %}
+            <li>
+                <a href="/cliente">
+                    <ion-icon name="star-outline"></ion-icon>
+                    <span>Clientes</span>
+                </a>
+            </li>
+            {% if 'user_type' in session and session['user_type'] == 1 %}
+            <!-- Mostrar opciones adicionales solo para el admin -->
+            <li>
+                <a href="/proveedor">
+                    <ion-icon name="receipt-outline"></ion-icon>
+                    <span>Proveedores</span>
+                </a>
+            </li>
+            {% elif 'user_type' in session and session['user_type'] == 2 %}
+            {% endif %}
+            {% if 'user_type' in session and session['user_type'] == 1 %}
+            <!-- Mostrar opciones adicionales solo para el admin -->
+            <li>
+                <a href="/inventario">
+                    <ion-icon name="newspaper-outline"></ion-icon>
+                    <span>Inventario</span>
+                </a>
+            </li>
+            {% elif 'user_type' in session and session['user_type'] == 2 %}
+            {% endif %}
+            <li>
+                <a href="/venta">
+                    <ion-icon name="receipt-outline"></ion-icon>
+                    <span>Ventas</span>
+                </a>
+            </li>
+            {% if 'user_type' in session and session['user_type'] == 1 %}
+            <!-- Mostrar opciones adicionales solo para el admin -->
+            <li>
+                <a href="/compra">
+                    <ion-icon name="bag-add-outline"></ion-icon>
+                    <span>Compras</span>
+                </a>
+            </li>
+            {% elif 'user_type' in session and session['user_type'] == 2 %}
+            {% endif %}
+            {% if 'user_type' in session and session['user_type'] == 1 %}
+            <!-- Mostrar opciones adicionales solo para el admin -->
+            <li>
+                <a href="/bitacora">
+                    <ion-icon name="information-circle-outline"></ion-icon>
+                    <span>Bitacora</span>
+                </a>
+            </li>
+            {% elif 'user_type' in session and session['user_type'] == 2 %}
+            {% endif %}
+            {% if 'user_type' in session and session['user_type'] == 1 %}
+            <!-- Mostrar opciones adicionales solo para el admin -->
+            <li class="lista">
+                <a class="lista_int" href="#">
+                    <ion-icon name="attach-outline"></ion-icon>
+                    <span>Registros</span>
+                    <ion-icon class="chevron-icon" name="chevron-forward-outline"></ion-icon>
+                </a>
+
+                <ul class="lista_most">
+                    <li class="lista_interior">
+                        <a href="/registrosventa" class="lista_interior_opcion">
+                            <ion-icon name="checkmark-circle-outline"></ion-icon>
+                            Ventas hechas
+                        </a>
+                    </li>
+                    <li class="lista_interior">
+                        <a href="/registroscompra" class="lista_interior_opcion">
+                            <ion-icon name="document-attach-outline"></ion-icon>
+                            Compras hechas
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            {% elif 'user_type' in session and session['user_type'] == 2 %}
+            {% endif %}
+        </ul>
+    </nav>
+
+    <div>
+        <div class="linea"></div>
+
+        <div class="modo-oscuro">
+            <div class="info">
+                <ion-icon name="moon-outline"></ion-icon>
+                <span>Modo Obscuro</span>
+            </div>
+            <div class="switch">
+                <div class="base">
+                    <div class="circulo">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usuario">
+            <img src="/Jhampier.jpg" alt="">
+            <div class="info-usuario">
+                <div class="nombre-email">
+                    {% if 'user_name' in session %}
+                        <a class="nombre barra-lateral-nombre" href="/logout">Cerrar sesión</a>
+                        <a class="email barra-lateral-email">{{ session['user_name'] }}</a>
+                    {% else %}
+                        <a class="nav-link" href="/login">Iniciar sesión</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>    
+    </div>
+</div>
+
+
+<main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                <ul class="list-unstyled">
+                    <li>{{ message }}</li>
+                </ul>
+                <button type="button" class="btn-close" id="closeAlert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <div class="wrapper">
+        <h1>Editar usuarios</h1>
+        <form action="/update_usuario/{{ usuario.0 }}" method="POST" id="registrationForm" enctype="multipart/form-data">
+            <div class="input-box">
+                <label for="Nom_persona" class="form-label">Nombre</label>
+                <input type="text" name="Nom_persona" id="Nom_persona" placeholder="Nombre" value="{{ usuario.1 }}" class="form-control" required pattern="[A-Za-z\s]+" title="Ingrese solo letras y espacios">
+            </div>
+            <div class="input-box">
+                <label for="Apellido_P" class="form-label">Apellido Paterno</label>
+                <input type="text" name="ApellidoP" id="ApellidoP" placeholder="Apellido Paterno" value="{{ usuario.2 }}" class="form-control" required pattern="[A-Za-z\s]+" title="Ingrese solo letras y espacios">
+            </div>
+            <div class="input-box">
+                <label for="Apellido_M" class="form-label">Apellido Materno</label>
+                <input type="text" name="ApellidoM" id="ApellidoM" placeholder="Apellido Materno" value="{{ usuario.3 }}" class="form-control" required pattern="[A-Za-z\s]+" title="Ingrese solo letras y espacios">
+            </div>
+            <div class="input-box">
+                <label for="Email" class="form-label">Email</label>
+                <input type="email" name="Email" id="Email" placeholder="Email" value="{{ usuario.4 }}" class="form-control" required>
+            </div>
+            <div class="input-box">
+                <label for="Numero" class="form-label">Número de Teléfono</label>
+                <input type="tel" name="Numero" id="Numero" placeholder="Número de Teléfono" value="{{ usuario.9 }}" class="form-control" required pattern="[0-9]{10}" title="Ingrese un número de teléfono válido (10 dígitos numéricos).">
+            </div>
+            <div class="input-box">
+                <label for="Contraseña" class="form-label">Contraseña</label>
+                <input type="password" name="Contraseña" id="Contraseña" placeholder="Contraseña" value="{{ usuario.6 }}" class="form-control" required pattern="[A-Za-z0-9]+" title="Ingrese solo letras y números en la contraseña">
+            </div>
+            <div class="input-box custom-select">
+                <label for="ID_Tipo">Tipo de Usuario</label>
+                <select name="ID_Tipo" id="ID_Tipo" class="form-select" required>
+                    {% for tipo in tipos_usuario %}
+                        <option value="{{ tipo[0] }}">{{ tipo[1] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="input-box custom-file">
+                <label for="Imagen">Imagen del Usuario</label>
+                <input type="file" name="Imagen" id="Imagen" class="form-control" accept=".png, .jpg, .jpeg, .gif">
+            </div>
+            <div class="input-box custom-button">
+                <button type="submit" class="btn">Guardar Cambios</button>
+            </div>                      
+        </form>
+        
+    </div>
+</main>
+{% endblock %}

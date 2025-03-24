@@ -1,0 +1,351 @@
+{% extends 'index.html' %}
+
+{% block body %}
+<div class="menu">
+    <ion-icon name="menu-outline"></ion-icon>
+    <ion-icon name="close-outline"></ion-icon>
+</div>
+
+<div class="barra-lateral">
+    <div>
+        <div class="nombre-pagina">
+            <ion-icon id="cloud" name="chevron-forward-circle-outline"></ion-icon>
+            <span>Taller de motos</span>
+        </div>
+        <a href="/venta" style="text-decoration: none; outline: none;">
+            <button class="boton">
+                <ion-icon name="add-outline"></ion-icon>
+                <span>Agregar nuevo registro</span>
+            </button>
+        </a>
+    </div>
+
+    <nav class="navegacion">
+        <ul>
+            {% if 'user_type' in session and session['user_type'] == 1 %}
+            <!-- Mostrar opciones adicionales solo para el admin -->
+            <li>
+                <a href="/usuario">
+                    <ion-icon name="person-outline"></ion-icon>
+                    <span>Usuarios</span>
+                </a>
+            </li>
+            {% elif 'user_type' in session and session['user_type'] == 2 %}
+            {% endif %}
+            <li>
+                <a href="/cliente">
+                    <ion-icon name="star-outline"></ion-icon>
+                    <span>Clientes</span>
+                </a>
+            </li>
+            {% if 'user_type' in session and session['user_type'] == 1 %}
+            <!-- Mostrar opciones adicionales solo para el admin -->
+            <li>
+                <a href="/proveedor">
+                    <ion-icon name="receipt-outline"></ion-icon>
+                    <span>Proveedores</span>
+                </a>
+            </li>
+            {% elif 'user_type' in session and session['user_type'] == 2 %}
+            {% endif %}
+            {% if 'user_type' in session and session['user_type'] == 1 %}
+            <!-- Mostrar opciones adicionales solo para el admin -->
+            <li>
+                <a href="/inventario">
+                    <ion-icon name="newspaper-outline"></ion-icon>
+                    <span>Inventario</span>
+                </a>
+            </li>
+            {% elif 'user_type' in session and session['user_type'] == 2 %}
+            {% endif %}
+            <li>
+                <a href="/venta">
+                    <ion-icon name="receipt-outline"></ion-icon>
+                    <span>Ventas</span>
+                </a>
+            </li>
+            {% if 'user_type' in session and session['user_type'] == 1 %}
+            <!-- Mostrar opciones adicionales solo para el admin -->
+            <li>
+                <a href="/compra">
+                    <ion-icon name="bag-add-outline"></ion-icon>
+                    <span>Compras</span>
+                </a>
+            </li>
+            {% elif 'user_type' in session and session['user_type'] == 2 %}
+            {% endif %}
+            {% if 'user_type' in session and session['user_type'] == 1 %}
+            <!-- Mostrar opciones adicionales solo para el admin -->
+            <li>
+                <a href="/bitacora">
+                    <ion-icon name="information-circle-outline"></ion-icon>
+                    <span>Bitacora</span>
+                </a>
+            </li>
+            {% elif 'user_type' in session and session['user_type'] == 2 %}
+            {% endif %}
+            {% if 'user_type' in session and session['user_type'] == 1 %}
+            <!-- Mostrar opciones adicionales solo para el admin -->
+            <li class="lista">
+                <a class="lista_int" href="#">
+                    <ion-icon name="attach-outline"></ion-icon>
+                    <span>Registros</span>
+                    <ion-icon class="chevron-icon" name="chevron-forward-outline"></ion-icon>
+                </a>
+
+                <ul class="lista_most">
+                    <li class="lista_interior">
+                        <a href="/registrosventa" class="lista_interior_opcion">
+                            <ion-icon name="checkmark-circle-outline"></ion-icon>
+                            Ventas hechas
+                        </a>
+                    </li>
+                    <li class="lista_interior">
+                        <a href="/registroscompra" class="lista_interior_opcion">
+                            <ion-icon name="document-attach-outline"></ion-icon>
+                            Compras hechas
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            {% elif 'user_type' in session and session['user_type'] == 2 %}
+            {% endif %}
+        </ul>
+    </nav>
+
+    <div>
+        <div class="linea"></div>
+
+        <div class="modo-oscuro">
+            <div class="info">
+                <ion-icon name="moon-outline"></ion-icon>
+                <span>Modo Obscuro</span>
+            </div>
+            <div class="switch">
+                <div class="base">
+                    <div class="circulo">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usuario">
+            <img src="/Jhampier.jpg" alt="">
+            <div class="info-usuario">
+                <div class="nombre-email">
+                    {% if 'user_name' in session %}
+                        <a class="nombre barra-lateral-nombre" href="/logout">Cerrar sesión</a>
+                        <a class="email barra-lateral-email">{{ session['user_name'] }}</a>
+                    {% else %}
+                        <a class="nav-link" href="/login">Iniciar sesión</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>    
+    </div>
+</div>
+
+
+<main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                <ul class="list-unstyled">
+                    <li>{{ message }}</li>
+                </ul>
+                <button type="button" class="btn-close" id="closeAlert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <!-- Contenedor completo -->
+    <div class="cont_completo">
+        <!-- Titulo -->
+        <h1>Venta</h1>
+        <!-- Formulario -->
+        <form id="registrationForm" action="/venta" method="POST" enctype="multipart/form-data">
+            <!-- Total -->
+            <div class="cont_total">
+                <span>Total</span>
+                <input type="text" disabled name="Nom_producto" id="Nom_producto" class="form-control" value="{{ CompEstado.2 }}" required pattern="[A-Za-z0-9]+" title="Ingrese solo letras y números en la contraseña">
+            </div>
+            <!-- Compra general -->
+            <div class="cont_comp_general">
+                <div>
+                    <span>Folio</span>
+                    <input type="text" disabled name="Folio" id="Folio" class="form-control" value="{{ CompEstado.0 }}" required min="1" pattern="[0-9]" title="Ingrese un número válido">
+                </div>
+                <div>
+                    <span>Fecha</span>
+                    <input type="text" disabled name="Fecha" id="Fecha" class="form-control" value="{{ CompEstado.1 }}" required title="Ingrese una fecha válida">
+                </div>
+                <div class="input-box custom-select">
+                    <label for="ID_Cliente" class="form-label">Cliente</label>
+                    <select name="ID_Cliente" id="ID_Cliente" class="form-select" required>
+                        <option value="" disabled selected>Seleccionar Cliente</option>
+                        {% for prov in proveedor %}
+                            <option value="{{ prov[0] }}">{{ prov[2] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>               
+                <div>
+                    <span>Usuario</span>
+                    <input type="text" disabled name="Usuario" id="Usuario" class="form-control" value="{{ user_name }}" required pattern="[a-zA-Z0-9]+" title="Ingrese un usuario válido">
+                </div>
+                <div>
+                    <span>Mano de obra</span>
+                    <input type="number" name="Mano" id="Mano" class="form-control" placeholder="Cantidad a cobrar" title="Ingrese una cantidad valida">
+                </div>
+            </div>
+            <!-- Descripcion de compra -->
+            <div class="cont_desc">
+                <!-- Div para el grid -->
+                <div class="grid-container">
+                    <!-- Div del menu desplegable -->
+                    <div class="input-box custom-select">
+                        <label for="ID_Producto" class="form-label">Producto</label>
+                        <select name="ID_Producto" id="ID_Producto" class="form-select" required>
+                            <option value="" disabled selected>Seleccionar Producto</option>
+                            {% for pro in producto %}
+                                <option value="{{ pro[0] }}" data-precio="{{ pro[3] }}">{{ pro[1] }} ${{ pro[3] }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <input type="hidden" name="Precio" id="Precio">  
+                    <!-- Div de cantidad -->
+                    <div class="input-box" style="width: 20%;">
+                        <input type="number" name="Cantidad" id="Cantidad" placeholder="Cantidad" class="form-control" required min="1" required pattern="[0-9]" title="Ingrese la cantidad correcta">
+                    </div>
+                    <!-- Boton para añadir -->
+                    <div class="input-box custom-button" style="width: 20%;">
+                        <button type="submit" name="action" value="agregarProducto" class="btn">+</button>
+                    </div>
+                </div>
+                <!-- Tabla aqui -->
+                <div class="table3" id="customers_table">
+                    <section class="table__header">
+                        <h1 style="font-size: 18px; margin-left: 20px; margin-top: 5px;">Productos</h1>
+                        <div class="input-group">
+                            <input type="search" placeholder="Search Data..." id="searchInput">
+                            <img src="static/imagenes/search.png" alt="">
+                        </div>
+                    </section>
+                    <section class="table__body">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th data-column="producto"> Producto <span class="icon-arrow">&UpArrow;</span></th>
+                                    <th data-column="cantidad"> Cantidad <span class="icon-arrow">&UpArrow;</span></th>
+                                    <th data-column="precio"> Precio <span class="icon-arrow">&UpArrow;</span></th>
+                                    <th data-column="total"> Total <span class="icon-arrow">&UpArrow;</span></th>
+                                    <th> Operaciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for detalle in detalles %}
+                                    <tr>
+                                        <td data-column="producto">{{ detalle[5] }}</td>
+                                        <td data-column="cantidad">{{ detalle[2] }}</td>
+                                        <td data-column="precio">${{ detalle[3] }}</td>
+                                        <td data-column="total">${{ detalle[4] }}</td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <a href="/delete_descvent/{{ detalle[0] }}" class="btn-delete">Eliminar</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+                <!-- Boton de terminar venta -->
+                <div class="subgrid">
+                    <div class="input-box custom-button">
+                        <button type="submit" name="action" value="cancelarcompra" id="cancelarCompraBtn" class="btn" style="background-color: #dc3545">Cancelar Venta</button>
+                    </div>
+                    <div class="input-box custom-button">
+                        <button type="submit" name="action" value="terminarCompra" id="terminarCompraBtn" class="btn">Terminar Venta</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var terminarCompraBtn = document.getElementById('terminarCompraBtn');
+
+    if (terminarCompraBtn) {
+        terminarCompraBtn.addEventListener('click', function(event) {
+            // Deshabilitar la validación de los campos requeridos
+            var inputs = document.querySelectorAll('input[required], select[required]');
+            inputs.forEach(function(input) {
+                input.removeAttribute('required');
+            });
+
+            // Enviar el formulario después de deshabilitar la validación
+            document.getElementById('registrationForm').submit();
+        });
+    }
+
+    var cancelarCompraBtn = document.getElementById('cancelarCompraBtn');
+
+    if (cancelarCompraBtn) {
+        cancelarCompraBtn.addEventListener('click', function(event) {
+            // Deshabilitar la validación de los campos requeridos
+            var inputs = document.querySelectorAll('input[required], select[required]');
+            inputs.forEach(function(input) {
+                input.removeAttribute('required');
+            });
+
+            // Enviar el formulario después de deshabilitar la validación
+            document.getElementById('registrationForm').submit();
+        });
+    }
+
+    var productoSelect = document.getElementById('ID_Producto');
+    var precioInput = document.getElementById('Precio');
+
+    productoSelect.addEventListener('change', function() {
+        var selectedOption = productoSelect.options[productoSelect.selectedIndex];
+        var precio = selectedOption.getAttribute('data-precio');
+        precioInput.value = precio; // Actualiza el campo de precio en el formulario
+    });
+
+    // Obtener el elemento del menú desplegable y el nombre para el almacenamiento local
+    var clienteSelect = document.getElementById('ID_Cliente');
+        var storageKey = 'selectedCliente';
+
+        // Manejar el evento de cambio del menú desplegable
+        clienteSelect.addEventListener('change', function() {
+            var selectedOption = clienteSelect.options[clienteSelect.selectedIndex];
+            var selectedValue = selectedOption.value;
+
+            // Guardar la opción seleccionada en localStorage
+            localStorage.setItem(storageKey, selectedValue);
+        });
+
+        // Restaurar la selección al cargar la página
+        var storedValue = localStorage.getItem(storageKey);
+        if (storedValue) {
+            // Buscar y seleccionar la opción guardada en localStorage
+            for (var i = 0; i < clienteSelect.options.length; i++) {
+                if (clienteSelect.options[i].value === storedValue) {
+                    clienteSelect.selectedIndex = i;
+                    break;
+                }
+            }
+        }
+
+});
+
+
+</script>
+
+
+
+{% endblock %}
